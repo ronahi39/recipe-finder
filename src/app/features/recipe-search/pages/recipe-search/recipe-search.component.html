@@ -1,1 +1,8 @@
-<p>recipe-search works!</p>
+<div class="search-container">
+  <h1>Finde dein Rezept</h1>
+
+  <!-- Suchfeld -->
+  <input type="text" [(ngModel)]="searchQuery" (keydown.enter)="searchRecipes()" placeholder="Suche nach Rezepten..." class="search-input"/>
+
+  <button (click)="searchRecipes()">🔍 Suchen</button>
+</div>
