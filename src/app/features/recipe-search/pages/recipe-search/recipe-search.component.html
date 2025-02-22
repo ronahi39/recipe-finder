@@ -2,7 +2,114 @@
   <h1>Finde dein Rezept</h1>
 
   <!-- Suchfeld -->
-  <input type="text" [(ngModel)]="searchQuery" (keydown.enter)="searchRecipes()" placeholder="Suche nach Rezepten..." class="search-input"/>
+  <input
+    type="text"
+    [(ngModel)]="searchQuery"
+    (keydown.enter)="searchRecipes()"
+    placeholder="Suche nach Rezepten..."
+    class="search-input"
+  />
 
   <button (click)="searchRecipes()">🔍 Suchen</button>
+
+  <div class="filter">
+    <div class="sliders-container">
+      <div class="slider">
+        <label for="calorie-slider" style="margin-bottom: 10%">Kalorien </label>
+        <mat-slider id="calorie-slider" min="0" max="2500" step="50">
+          <input [(ngModel)]="minValueCal" matSliderStartThumb />
+          <input [(ngModel)]="maxValueCal" matSliderEndThumb />
+        </mat-slider>
+        <div class="slider-input-div">
+          <mat-form-field class="slider-input">
+            <mat-label>Min:</mat-label>
+            <input matInput type="number" [(ngModel)]="minValueCal" />
+          </mat-form-field>
+          <mat-form-field class="slider-input">
+            <mat-label>Max:</mat-label>
+            <input matInput type="number" [(ngModel)]="maxValueCal" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="slider">
+        <label for="carb-slider" style="margin-bottom: 10%"
+          >Kohlenhydrate (g)</label
+        >
+        <mat-slider id="carb-slider" min="0" max="400">
+          <input [(ngModel)]="minValueCarb" matSliderStartThumb />
+          <input [(ngModel)]="maxValueCarb" matSliderEndThumb />
+        </mat-slider>
+        <div class="slider-input-div">
+          <mat-form-field class="slider-input">
+            <mat-label>Min:</mat-label>
+            <input matInput type="number" [(ngModel)]="minValueCarb" />
+          </mat-form-field>
+          <mat-form-field class="slider-input">
+            <mat-label>Max:</mat-label>
+            <input matInput type="number" [(ngModel)]="maxValueCarb" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="slider">
+        <label for="protein-slider" style="margin-bottom: 10%"
+          >Proteine (g)</label
+        >
+        <mat-slider id="protein-slider" min="0" max="200">
+          <input [(ngModel)]="minValueProtein" matSliderStartThumb />
+          <input [(ngModel)]="maxValueProtein" matSliderEndThumb />
+        </mat-slider>
+        <div class="slider-input-div">
+          <mat-form-field class="slider-input">
+            <mat-label>Min:</mat-label>
+            <input matInput type="number" [(ngModel)]="minValueProtein" />
+          </mat-form-field>
+          <mat-form-field class="slider-input">
+            <mat-label>Max:</mat-label>
+            <input matInput type="number" [(ngModel)]="maxValueProtein" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="slider">
+        <label for="fat-slider" style="margin-bottom: 10%">Fett (g)</label>
+        <mat-slider id="fat-slider" min="0" max=" 200">
+          <input [(ngModel)]="minValueFat" matSliderStartThumb />
+          <input [(ngModel)]="maxValueFat" matSliderEndThumb />
+        </mat-slider>
+        <div class="slider-input-div">
+          <mat-form-field class="slider-input">
+            <mat-label>Min:</mat-label>
+            <input matInput type="number" [(ngModel)]="minValueFat" />
+          </mat-form-field>
+          <mat-form-field class="slider-input">
+            <mat-label>Max:</mat-label>
+            <input matInput type="number" [(ngModel)]="maxValueFat" />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="zutaten-container">
+      <div class="zutaten-section-container">
+        <div
+          class="zutaten-section"
+          *ngFor="let category of ingredientCategories"
+        >
+          <mat-card appearance="outlined" class="zutaten-filter-card">
+            <mat-card-title>
+              {{ category.name }}
+            </mat-card-title>
+            <p>{{ ingredientCategories.length }} Zutaten</p>
+            <mat-chip-set class="chip-list">
+              <mat-chip *ngFor="let ingredient of category.items">
+                {{ ingredient }}
+              </mat-chip>
+            </mat-chip-set>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

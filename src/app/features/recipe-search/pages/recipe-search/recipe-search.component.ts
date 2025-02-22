@@ -1,22 +1,133 @@
 import { Component } from '@angular/core';
-import {FormsModule} from "@angular/forms";
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatFormField } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-recipe-search',
   standalone: true,
   imports: [
-    FormsModule
+    CommonModule,
+    FormsModule,
+    MatSliderModule,
+    MatFormField,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatChipsModule,
+    MatCardModule,
   ],
   templateUrl: './recipe-search.component.html',
-  styleUrl: './recipe-search.component.scss'
+  styleUrl: './recipe-search.component.scss',
 })
 export class RecipeSearchComponent {
-
   searchQuery: string = ''; // Suchbegriff
+
+  minValueCal: number = 0;
+  maxValueCal: number = 2500;
+
+  minValueCarb: number = 0;
+  maxValueCarb: number = 400;
+
+  minValueProtein: number = 0;
+  maxValueProtein: number = 200;
+
+  minValueFat: number = 0;
+  maxValueFat: number = 200;
+
+  ingredientCategories = [
+    {
+      name: 'Gemüse',
+      items: [
+        'Paprika',
+        'Champignons',
+        'Aubergine',
+        'Karotten',
+        'Tomaten',
+        'Gurken',
+        'Brokkoli',
+        'Blumenkohl',
+        'Zucchini',
+        'Spinat',
+        'Grünkohl',
+        'Rettich',
+        'Rucola',
+        'Sellerie',
+        'Spargel',
+        'Pak Choi',
+        'Chinakohl',
+        'Mungbohnensprossen',
+        'Wasserkastanien',
+        'Lotuswurzel',
+        'Shiitake-Pilze',
+        'Enoki-Pilze',
+        'Okraschoten',
+      ],
+    },
+    {
+      name: 'Proteinquellen',
+      items: [
+        'Hähnchen',
+        'Rindfleisch',
+        'Tofu',
+        'Lachs',
+        'Garnelen',
+        'Edamame',
+        'Seitan',
+        'Eier',
+      ],
+    },
+    {
+      name: 'Öle & Fette',
+      items: [
+        'Olivenöl',
+        'Kokosöl',
+        'Sesamöl',
+        'Erdnussöl',
+        'Butter',
+        'Avocado',
+        'Mandeln',
+      ],
+    },
+    {
+      name: 'Obst',
+      items: [
+        'Apfel',
+        'Banane',
+        'Erdbeeren',
+        'Orangen',
+        'Mango',
+        'Ananas',
+        'Litschi',
+        'Granatapfel',
+      ],
+    },
+    {
+      name: 'Weitere Zutaten',
+      items: [
+        'Reis',
+        'Nudeln',
+        'Udon-Nudeln',
+        'Soba-Nudeln',
+        'Reisnudeln',
+        'Glasnudeln',
+        'Quinoa',
+        'Milch',
+        'Kokosmilch',
+        'Sojasauce',
+        'Miso-Paste',
+        'Mirin',
+        'Teriyaki-Sauce',
+        'Käse',
+      ],
+    },
+  ];
 
   searchRecipes() {
     console.log('Suche nach:', this.searchQuery);
     // TODO: API-Aufruf oder Filter-Logik hinzufügen
   }
-
 }
