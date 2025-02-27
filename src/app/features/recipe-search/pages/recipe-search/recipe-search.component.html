@@ -98,15 +98,31 @@
           *ngFor="let category of ingredientCategories"
         >
           <mat-card appearance="outlined" class="zutaten-filter-card">
-            <mat-card-title>
-              {{ category.name }}
-            </mat-card-title>
-            <p>{{ ingredientCategories.length }} Zutaten</p>
-            <mat-chip-set class="chip-list">
-              <mat-chip *ngFor="let ingredient of category.items">
-                {{ ingredient }}
-              </mat-chip>
-            </mat-chip-set>
+            <mat-card-header>
+              <mat-card-title>
+                {{ category.name }}
+              </mat-card-title>
+              <mat-card-actions>
+                <butt
+                  mat-button
+                  class="expand-button"
+                  (click)="collapsed = !collapsed"
+                >
+                  <span class="material-icons">
+                    {{ collapsed ? "expand_more" : "expand_less" }}</span
+                  >
+                </butt>
+              </mat-card-actions>
+            </mat-card-header>
+
+            <mat-card-content *ngIf="!collapsed">
+              <p>{{ ingredientCategories.length }} Zutaten</p>
+              <mat-chip-set class="chip-list">
+                <mat-chip *ngFor="let ingredient of category.items">
+                  {{ ingredient }}
+                </mat-chip>
+              </mat-chip-set>
+            </mat-card-content>
           </mat-card>
         </div>
       </div>

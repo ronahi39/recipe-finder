@@ -6,6 +6,8 @@ import { MatFormField } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-recipe-search',
@@ -19,6 +21,8 @@ import { MatCardModule } from '@angular/material/card';
     ReactiveFormsModule,
     MatChipsModule,
     MatCardModule,
+    MatIconModule,
+    MatButton,
   ],
   templateUrl: './recipe-search.component.html',
   styleUrl: './recipe-search.component.scss',
@@ -37,6 +41,8 @@ export class RecipeSearchComponent {
 
   minValueFat: number = 0;
   maxValueFat: number = 200;
+
+  collapsed: boolean = true;
 
   ingredientCategories = [
     {
