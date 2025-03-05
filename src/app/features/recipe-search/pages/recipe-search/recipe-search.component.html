@@ -106,17 +106,21 @@
                 <button
                   mat-button
                   class="expand-button"
-                  (click)="collapsed = !collapsed"
+                  (click)="toggleCollapse(category.name)"
                 >
                   <span class="material-icons">
-                    {{ collapsed ? "expand_more" : "expand_less" }}</span
-                  >
+                    {{
+                      collapsedStates[category.name]
+                        ? "expand_more"
+                        : "expand_less"
+                    }}
+                  </span>
                 </button>
               </mat-card-actions>
             </mat-card-header>
 
-            <mat-card-content *ngIf="!collapsed">
-              <p>{{ ingredientCategories.length }} Zutaten</p>
+            <mat-card-content *ngIf="!collapsedStates[category.name]">
+              <p>{{ category.items.length }} Zutaten</p>
               <mat-chip-set class="chip-list">
                 <mat-chip *ngFor="let ingredient of category.items">
                   {{ ingredient }}

@@ -28,6 +28,13 @@ import { MatButton } from '@angular/material/button';
   styleUrl: './recipe-search.component.scss',
 })
 export class RecipeSearchComponent {
+  constructor() {
+    // Alle Karten standardmäßig zugeklappt
+    this.ingredientCategories.forEach((category) => {
+      this.collapsedStates[category.name] = true;
+    });
+  }
+
   searchQuery: string = ''; // Suchbegriff
 
   minValueCal: number = 0;
@@ -42,7 +49,7 @@ export class RecipeSearchComponent {
   minValueFat: number = 0;
   maxValueFat: number = 200;
 
-  collapsed: boolean = true;
+  collapsedStates: { [key: string]: boolean } = {};
 
   ingredientCategories = [
     {
@@ -135,5 +142,9 @@ export class RecipeSearchComponent {
   searchRecipes() {
     console.log('Suche nach:', this.searchQuery);
     // TODO: API-Aufruf oder Filter-Logik hinzufügen
+  }
+
+  toggleCollapse(categoryName: string): void {
+    this.collapsedStates[categoryName] = !this.collapsedStates[categoryName];
   }
 }
