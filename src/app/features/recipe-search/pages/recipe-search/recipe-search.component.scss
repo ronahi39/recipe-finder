@@ -87,11 +87,6 @@ mat-chip {
   padding: 8px;
   border-radius: 16px;
   cursor: pointer;
-
-  &.selected {
-    background: #69c774;
-    color: white;
-  }
 }
 
 mat-card-header {
@@ -100,8 +95,8 @@ mat-card-header {
 }
 
 mat-card {
-  width: 300px;
 }
 
-.expand-button {
+mat-chip-grid {
+  max-width: 90%;
 }
