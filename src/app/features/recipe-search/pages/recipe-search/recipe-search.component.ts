@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatFormField } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatChipsModule } from '@angular/material/chips';
+import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
@@ -34,6 +34,8 @@ export class RecipeSearchComponent {
       this.collapsedStates[category.name] = true;
     });
   }
+
+  readonly searchByIngredientsKeywords: WritableSignal<string[]> = signal([]);
 
   searchQuery: string = ''; // Suchbegriff
 
@@ -146,5 +148,28 @@ export class RecipeSearchComponent {
 
   toggleCollapse(categoryName: string): void {
     this.collapsedStates[categoryName] = !this.collapsedStates[categoryName];
+  }
+
+  addIngredients(newIngredient: string): void {
+    // Add our keyword
+    if (newIngredient) {
+      this.searchByIngredientsKeywords.update((addedIngredients) => [
+        ...addedIngredients,
+        newIngredient,
+      ]);
+    }
+    console.log(this.searchByIngredientsKeywords);
+  }
+
+  removeIngredients(ingredient: string) {
+    this.searchByIngredientsKeywords.update((ingredients) => {
+      const index = ingredients.indexOf(ingredient);
+      if (index < 0) {
+        return ingredients;
+      }
+
+      ingredients.splice(index, 1);
+      return [...ingredients];
+    });
   }
 }
