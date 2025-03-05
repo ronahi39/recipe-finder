@@ -10,22 +10,21 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 
 @Component({
-  selector: 'app-recipe-search',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatSliderModule,
-    MatFormField,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatChipsModule,
-    MatCardModule,
-    MatIconModule,
-    MatButton,
-  ],
-  templateUrl: './recipe-search.component.html',
-  styleUrl: './recipe-search.component.scss',
+    selector: 'app-recipe-search',
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatSliderModule,
+        MatFormField,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatChipsModule,
+        MatCardModule,
+        MatIconModule,
+        MatButton,
+    ],
+    templateUrl: './recipe-search.component.html',
+    styleUrl: './recipe-search.component.scss'
 })
 export class RecipeSearchComponent {
   constructor() {
