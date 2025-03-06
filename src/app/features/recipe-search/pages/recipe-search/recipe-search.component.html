@@ -12,14 +12,12 @@
 
   <span>hinzugefügte Zutaten</span>
   <mat-chip-grid #templateChipGrid [(ngModel)]="searchByIngredientsKeywords">
-    @for (ingredient of searchByIngredientsKeywords(); track ingredient) {
-      <mat-chip-row (removed)="removeIngredients(ingredient)">
-        {{ ingredient }}
-        <button matChipRemove>
-          <mat-icon>cancel</mat-icon>
-        </button>
-      </mat-chip-row>
-    }
+    <mat-chip-row *ngFor="let ingredient of searchByIngredientsKeywords()">
+      {{ ingredient }}
+      <button matChipRemove (click)="removeIngredients(ingredient)">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip-row>
   </mat-chip-grid>
 
   <button (click)="searchRecipes()">🔍 Suchen</button>
@@ -103,50 +101,58 @@
       </div>
     </div>
 
-    <mat-form-field class="example-form-field">
-      <div class="zutaten-container">
-        <div class="zutaten-section-container">
-          <div
-            class="zutaten-section"
-            *ngFor="let category of ingredientCategories"
-          >
-            <mat-card appearance="outlined" class="zutaten-filter-card">
-              <mat-card-header>
-                <mat-card-title>
-                  {{ category.name }}
-                </mat-card-title>
-                <mat-card-actions>
-                  <button
-                    mat-button
-                    class="expand-button"
-                    (click)="toggleCollapse(category.name)"
-                  >
-                    <span class="material-icons">
-                      {{
-                        collapsedStates[category.name]
-                          ? "expand_more"
-                          : "expand_less"
-                      }}
-                    </span>
-                  </button>
-                </mat-card-actions>
-              </mat-card-header>
+    <mat-form-field>
+      <mat-label>Zutat hinzufügen</mat-label>
+      <input
+        matInput
+        placeholder="Zutat eingeben"
+        [matChipInputFor]="templateChipGrid"
+        (matChipInputTokenEnd)="addIngredientEvent($event)"
+      />
+    </mat-form-field>
 
-              <mat-card-content *ngIf="!collapsedStates[category.name]">
-                <p>{{ category.items.length }} Zutaten</p>
-                <mat-chip-set class="chip-list">
-                  <mat-chip
-                    *ngFor="let ingredient of category.items"
-                    (click)="addIngredients(ingredient)"
-                  >
-                    {{ ingredient }}
-                  </mat-chip>
-                </mat-chip-set>
-              </mat-card-content>
-            </mat-card>
-          </div>
+    <div class="zutaten-container">
+      <div class="zutaten-section-container">
+        <div
+          class="zutaten-section"
+          *ngFor="let category of ingredientCategories"
+        >
+          <mat-card appearance="outlined" class="zutaten-filter-card">
+            <mat-card-header>
+              <mat-card-title>
+                {{ category.name }}
+              </mat-card-title>
+              <mat-card-actions>
+                <button
+                  mat-button
+                  class="expand-button"
+                  (click)="toggleCollapse(category.name)"
+                >
+                  <span class="material-icons">
+                    {{
+                      collapsedStates[category.name]
+                        ? "expand_more"
+                        : "expand_less"
+                    }}
+                  </span>
+                </button>
+              </mat-card-actions>
+            </mat-card-header>
+
+            <mat-card-content *ngIf="!collapsedStates[category.name]">
+              <p>{{ category.items.length }} Zutaten</p>
+              <mat-chip-set class="chip-list">
+                <mat-chip
+                  *ngFor="let ingredient of category.items"
+                  (click)="addIngredients(ingredient)"
+                >
+                  {{ ingredient }}
+                </mat-chip>
+              </mat-chip-set>
+            </mat-card-content>
+          </mat-card>
         </div>
       </div>
-    </mat-form-field>
+    </div>
   </div>
 </div>

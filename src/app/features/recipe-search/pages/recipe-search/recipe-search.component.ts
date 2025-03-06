@@ -4,27 +4,28 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatFormField } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatChipsModule } from '@angular/material/chips';
+import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 
 @Component({
-    selector: 'app-recipe-search',
-    imports: [
-        CommonModule,
-        FormsModule,
-        MatSliderModule,
-        MatFormField,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatChipsModule,
-        MatCardModule,
-        MatIconModule,
-        MatButton,
-    ],
-    templateUrl: './recipe-search.component.html',
-    styleUrl: './recipe-search.component.scss'
+  selector: 'app-recipe-search',
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatSliderModule,
+    MatFormField,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatChipsModule,
+    MatCardModule,
+    MatIconModule,
+    MatButton,
+  ],
+  templateUrl: './recipe-search.component.html',
+  standalone: true,
+  styleUrl: './recipe-search.component.scss',
 })
 export class RecipeSearchComponent {
   constructor() {
@@ -158,6 +159,19 @@ export class RecipeSearchComponent {
       ]);
     }
     console.log(this.searchByIngredientsKeywords);
+  }
+
+  addIngredientEvent(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    if (value) {
+      this.searchByIngredientsKeywords.update((keywords) => [
+        ...keywords,
+        value,
+      ]);
+    }
+
+    event.chipInput!.clear();
   }
 
   removeIngredients(ingredient: string) {
